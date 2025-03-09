@@ -18,6 +18,7 @@ let reels = [];
 let spinning = false;
 let attempts = 10;
 let playerName = "";
+let highlightBox; // Retângulo que destaca a linha do meio
 
 document.getElementById("startGame").addEventListener("click", startGame);
 
@@ -39,10 +40,15 @@ function create() {
     let centerX = this.cameras.main.width / 2;
     let centerY = this.cameras.main.height / 2;
 
-    // Criando linhas extras para simular um slot real
+    // Criando três linhas de símbolos (superior, meio e inferior)
     createReelRow(this, centerX, centerY - 60); // Linha superior
-    createReelRow(this, centerX, centerY);       // Linha do meio (principal)
-    createReelRow(this, centerX, centerY + 60); // Linha inferior
+    createReelRow(this, centerX, centerY);       // Linha do meio (PRINCIPAL)
+    createReelRow(this, centerX, centerY + 60);  // Linha inferior
+
+    // Criando um retângulo ao redor da linha do meio
+    highlightBox = this.add.graphics();
+    highlightBox.lineStyle(4, 0xffcc00); // Linha amarela
+    highlightBox.strokeRect(centerX - 120, centerY - 30, 240, 60); // Ajusta tamanho do retângulo
 
     document.getElementById("spinButton").addEventListener("click", () => spinReels(this));
 }
