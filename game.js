@@ -1,26 +1,22 @@
-const config = {
-    type: Phaser.AUTO,
-    width: 300,
-    height: 300,
-    parent: "slot-machine",
-    backgroundColor: "#000",
-    scene: {
-        preload: preload,
-        create: create,
-        update: update
-    }
-};
-
-const game = new Phaser.Game(config);
-
+let backgroundMusic;
+let leverSound;
 let symbols = ["🍒", "🍋", "🍊", "🍉", "⭐", "🔔"];
-let reels = [];
+let reels = [[], [], []]; // Agora temos três linhas
 let spinning = false;
-let attempts = 10;
 let playerName = "";
-let highlightBox; // Retângulo que destaca a linha do meio
 
-document.getElementById("startGame").addEventListener("click", startGame);
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("startGame").addEventListener("click", startGame);
+    document.getElementById("playMusic").addEventListener("click", playBackgroundMusic);
+    document.getElementById("spinButton").addEventListener("click", spinReels);
+
+    // Inicializa os sons
+    backgroundMusic = new Audio("assets/sounds/fundo.mp3");
+    backgroundMusic.loop = true;
+    backgroundMusic.volume = 0.5;
+
+    leverSound = new Audio("assets/sounds/botao.mp3");
+});
 
 function startGame() {
     playerName = document.getElementById("playerName").value.trim();
@@ -29,82 +25,77 @@ function startGame() {
         return;
     }
 
-    document.getElementById("playerInfo").textContent = `Jogador: ${playerName}`;
+    // Esconder a tela inicial e mostrar o jogo
     document.getElementById("start-screen").classList.add("hidden");
     document.getElementById("game-container").classList.remove("hidden");
+
+    createReels();
 }
 
-function preload() {}
-
-function create() {
-    let centerX = this.cameras.main.width / 2;
-    let centerY = this.cameras.main.height / 2;
-
-    // Criando três linhas de símbolos (superior, meio e inferior)
-    createReelRow(this, centerX, centerY - 60); // Linha superior
-    createReelRow(this, centerX, centerY);       // Linha do meio (PRINCIPAL)
-    createReelRow(this, centerX, centerY + 60);  // Linha inferior
-
-    // Criando um retângulo ao redor da linha do meio
-    highlightBox = this.add.graphics();
-    highlightBox.lineStyle(4, 0xffcc00); // Linha amarela
-    highlightBox.strokeRect(centerX - 120, centerY - 30, 240, 60); // Ajusta tamanho do retângulo
-
-    document.getElementById("spinButton").addEventListener("click", () => spinReels(this));
-}
-
-function update() {}
-
-// Criando linha do slot
-function createReelRow(scene, centerX, yPosition) {
-    let row = [];
-    for (let i = 0; i < 3; i++) {
-        let text = scene.add.text(centerX - 80 + i * 80, yPosition, getRandomSymbol(), {
-            fontSize: "48px",
-            color: "#ffcc00",
-            fontFamily: "Arial"
-        });
-        text.setOrigin(0.5);
-        row.push(text);
+function playBackgroundMusic() {
+    if (backgroundMusic.paused) {
+        backgroundMusic.play();
+        document.getElementById("playMusic").textContent = "🔇 Pausar Música";
+    } else {
+        backgroundMusic.pause();
+        document.getElementById("playMusic").textContent = "🎵 Ativar Música";
     }
-    reels.push(row);
 }
 
-// Função para girar os rolos
-function spinReels(scene) {
-    if (spinning || attempts <= 0) return;
+function createReels() {
+    let slotMachine = document.getElementById("slot-machine");
+    slotMachine.innerHTML = "";
+
+    for (let row = 0; row < 3; row++) {
+        let rowDiv = document.createElement("div");
+        rowDiv.classList.add("reel-row");
+
+        for (let i = 0; i < 3; i++) {
+            let column = document.createElement("div");
+            column.classList.add("reel");
+            column.textContent = getRandomSymbol();
+            rowDiv.appendChild(column);
+            reels[row].push(column);
+        }
+
+        slotMachine.appendChild(rowDiv);
+    }
+}
+
+function spinReels() {
+    if (spinning) return;
     spinning = true;
-    attempts--;
 
-    document.getElementById("attemptCount").textContent = attempts;
+    // Toca o som do botão girar
+    leverSound.play();
 
-    let spinTime = 1000;
-    let interval = 100;
+    document.getElementById("resultMessage").textContent = "🎰 Girando...";
 
-    let spinInterval = setInterval(() => {
-        reels.forEach(row => row.forEach(reel => reel.setText(getRandomSymbol())));
-    }, interval);
+    // Tempo aleatório entre 2,2s (2200ms) e 3,2s (3200ms)
+    let spinTime = Math.floor(Math.random() * 1000) + 2200;
+
+    let interval = setInterval(() => {
+        reels.forEach(row => row.forEach(reel => reel.textContent = getRandomSymbol()));
+    }, 100);
 
     setTimeout(() => {
-        clearInterval(spinInterval);
+        clearInterval(interval);
         spinning = false;
 
-        let result = reels[1].map(reel => reel.text); // Pegamos apenas a linha do meio
+        let result = reels[1].map(reel => reel.textContent); // Pegamos apenas a linha do meio
         checkWin(result);
     }, spinTime);
 }
 
-// Função para obter um símbolo aleatório
 function getRandomSymbol() {
     return symbols[Math.floor(Math.random() * symbols.length)];
 }
 
-// Verifica se o jogador ganhou
 function checkWin(result) {
     let message = document.getElementById("resultMessage");
 
     if (result[0] === result[1] && result[1] === result[2]) {
-        message.textContent = `🎉 JACKPOT! Parabéns, ${playerName}! Você ganhou! 🎉`;
+        message.textContent = `🎉 JACKPOT! ${playerName}, você ganhou! 🎉`;
         message.style.color = "#00ff00";
     } else {
         message.textContent = `😢 ${playerName}, tente novamente!`;

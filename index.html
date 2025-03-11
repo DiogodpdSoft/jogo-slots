@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slot Machine 🎰</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/3.55.2/phaser.min.js"></script>
 </head>
 <body>
 
-    <!-- Tela inicial para o jogador inserir o nome -->
+    <!-- Tela inicial -->
     <div id="start-screen">
         <h1>Bem-vindo ao Slot Machine 🎰</h1>
         <p>Digite seu nome para começar:</p>
@@ -21,9 +20,11 @@
     <div id="game-container" class="hidden">
         <div class="container">
             <h1>Jogo de Slots 🎰</h1>
-            <p id="playerInfo"></p>
-            <p id="attempts">Tentativas restantes: <span id="attemptCount">10</span></p>
+
+            <button id="playMusic">🎵 Ativar Música</button>
+
             <div id="slot-machine"></div>
+
             <button id="spinButton">Girar 🎰</button>
             <p id="resultMessage"></p>
         </div>
