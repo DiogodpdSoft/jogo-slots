@@ -1,0 +1,122 @@
+.hidden {
+    display: none;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #222;
+    color: white;
+    margin: 0;
+    flex-direction: column;
+    text-align: center;
+}
+
+/* Tela inicial */
+#start-screen {
+    background: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+}
+
+#start-screen input {
+    padding: 10px;
+    font-size: 16px;
+    width: 80%;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+#start-screen button {
+    padding: 10px 20px;
+    font-size: 18px;
+    background: #ff9800;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Container principal do jogo */
+.container {
+    text-align: center;
+    background: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.2);
+    width: 400px;
+}
+
+/* Slot Machine Estilizado */
+#slot-machine {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid #ffcc00;
+    padding: 10px;
+    background: #000;
+    margin: 20px auto;
+    width: 300px;
+    height: 200px;
+    position: relative;
+    border-radius: 10px;
+}
+
+/* Linhas do slot */
+.reel-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Cada símbolo do slot */
+.reel {
+    font-size: 48px;
+    color: #ffcc00;
+    font-family: Arial, sans-serif;
+    width: 100px;
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+    margin: 5px;
+}
+
+/* Efeito para destacar a linha do meio */
+.highlight {
+    border: 3px solid #ffcc00;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Botões */
+button {
+    margin-top: 15px;
+    padding: 12px 25px;
+    font-size: 18px;
+    background: #ff9800;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #e68900;
+}
+
+/* Mensagem de resultado */
+#resultMessage {
+    margin-top: 10px;
+    font-size: 22px;
+    font-weight: bold;
+}
