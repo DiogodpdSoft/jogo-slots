@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recarga de Créditos - Slot Machine 🎰</title>
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/payment.css">
+    <!-- SDK MercadoPago.js -->
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+</head>
+<body>
+    <!-- Informações do usuário -->
+    <div class="user-info">
+        <span>Jogador: <span id="playerName"></span></span>
+        <span>Créditos: <span id="playerCredits" class="credits">0</span></span>
+        <button class="logout-btn" onclick="logout()">Sair</button>
+    </div>
+
+    <div class="payment-container">
+        <div class="payment-header">
+            <h1>Recarga de Créditos 🎰</h1>
+            <p class="credits-info">1 crédito = R$ 0,10</p>
+        </div>
+
+        <div class="payment-options">
+            <div class="payment-option" data-amount="1.00" data-credits="10">
+                <div class="amount">R$ 1,00</div>
+                <div class="credits">10 créditos</div>
+            </div>
+            <div class="payment-option" data-amount="5.00" data-credits="50">
+                <div class="amount">R$ 5,00</div>
+                <div class="credits">50 créditos</div>
+            </div>
+            <div class="payment-option" data-amount="10.00" data-credits="100">
+                <div class="amount">R$ 10,00</div>
+                <div class="credits">100 créditos</div>
+            </div>
+            <div class="payment-option" data-amount="20.00" data-credits="200">
+                <div class="amount">R$ 20,00</div>
+                <div class="credits">200 créditos</div>
+            </div>
+        </div>
+
+        <!-- Botão de pagamento do Mercado Pago -->
+        <div id="wallet_container"></div>
+
+        <!-- Status do pagamento -->
+        <div id="payment-status" class="payment-status"></div>
+
+        <!-- Botão para voltar ao jogo -->
+        <a href="game.html" class="back-button">Voltar ao Jogo</a>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/payment.js"></script>
+</body>
+</html>

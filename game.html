@@ -4,34 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Slot Machine 🎰</title>
+    <link rel="stylesheet" href="css/auth.css">
     <link rel="stylesheet" href="css/game.css">
 </head>
 <body>
-    <!-- Informações do usuário -->
+    <!-- Barra de usuário -->
     <div class="user-info">
         <span>Jogador: <span id="playerName"></span></span>
-        <span>Créditos: <span id="playerCredits" class="credits">1000</span></span>
+        <span>Créditos: <span id="playerCredits" class="credits">0</span></span>
         <button class="logout-btn" onclick="logout()">Sair</button>
     </div>
 
     <!-- Container do jogo -->
-    <div id="game-container">
-        <div class="container">
-            <h1>Jogo de Slots 🎰</h1>
+    <div class="container">
+        <h1>Jogo de Slots 🎰</h1>
 
-            <button id="playMusic">🎵 Ativar Música</button>
+        <button id="playMusic">🎵 Ativar Música</button>
 
-            <div id="slot-machine"></div>
+        <div id="slot-machine"></div>
 
-            <button id="spinButton">Girar 🎰 (10 créditos)</button>
-            <p id="resultMessage"></p>
+        <button id="spinButton">Girar 🎰</button>
+        <p id="resultMessage"></p>
 
-            <!-- Histórico de jogadas -->
-            <div class="history-container">
-                <h3>Histórico de Jogadas</h3>
-                <div id="gameHistory"></div>
-            </div>
-        </div>
+        <!-- Botão de recarga -->
+        <button class="recharge-button" onclick="window.location.href='recharge.html'">
+            💰 Recarregar Créditos
+        </button>
     </div>
 
     <script src="js/auth.js"></script>

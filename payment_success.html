@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento Confirmado - Slot Machine 🎰</title>
+    <link rel="stylesheet" href="css/auth.css">
+    <style>
+        .success-container {
+            text-align: center;
+            padding: 2rem;
+        }
+        .success-icon {
+            font-size: 4rem;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+        .redirect-message {
+            margin-top: 2rem;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container success-container">
+        <div class="success-icon">✅</div>
+        <h1>Pagamento Confirmado!</h1>
+        <p>Seus créditos foram adicionados com sucesso.</p>
+        <p class="redirect-message">Redirecionando para o jogo em <span id="countdown">5</span> segundos...</p>
+    </div>
+
+    <script>
+        let seconds = 5;
+        const countdownElement = document.getElementById('countdown');
+        
+        const countdown = setInterval(() => {
+            seconds--;
+            countdownElement.textContent = seconds;
+            
+            if (seconds <= 0) {
+                clearInterval(countdown);
+                window.location.href = 'game.html';
+            }
+        }, 1000);
+
+        // Enviar mensagem para a página de recarga
+        if (window.opener) {
+            window.opener.postMessage({ type: 'payment_confirmed' }, '*');
+        }
+    </script>
+</body>
+</html>

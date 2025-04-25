@@ -99,3 +99,10 @@ jogo-slots/
 ## 📝 Licença
 
 Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+## 🎮 Demo
+
+Você pode jogar uma versão demo do jogo [aqui](https://seu-usuario.github.io/jogo-slots).
+
+---
+⌨️ com ❤️ por [Seu Nome](https://github.com/seu-usuario)

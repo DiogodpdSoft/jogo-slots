@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento Falhou - Slot Machine 🎰</title>
+    <link rel="stylesheet" href="css/auth.css">
+    <style>
+        .failure-container {
+            text-align: center;
+            padding: 2rem;
+        }
+        .failure-icon {
+            font-size: 4rem;
+            color: #f44336;
+            margin-bottom: 1rem;
+        }
+        .redirect-message {
+            margin-top: 2rem;
+            color: #aaa;
+        }
+        .retry-button {
+            background: #f44336;
+            margin-top: 1rem;
+        }
+        .retry-button:hover {
+            background: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container failure-container">
+        <div class="failure-icon">❌</div>
+        <h1>Pagamento não Concluído</h1>
+        <p>Houve um problema ao processar seu pagamento.</p>
+        <button class="retry-button" onclick="window.location.href='recharge.html'">Tentar Novamente</button>
+        <p class="redirect-message">Redirecionando para a recarga em <span id="countdown">5</span> segundos...</p>
+    </div>
+
+    <script>
+        let seconds = 5;
+        const countdownElement = document.getElementById('countdown');
+        
+        const countdown = setInterval(() => {
+            seconds--;
+            countdownElement.textContent = seconds;
+            
+            if (seconds <= 0) {
+                clearInterval(countdown);
+                window.location.href = 'recharge.html';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

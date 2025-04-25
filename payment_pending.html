@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento Pendente - Slot Machine 🎰</title>
+    <link rel="stylesheet" href="css/auth.css">
+    <style>
+        .pending-container {
+            text-align: center;
+            padding: 2rem;
+        }
+        .pending-icon {
+            font-size: 4rem;
+            color: #ff9800;
+            margin-bottom: 1rem;
+        }
+        .redirect-message {
+            margin-top: 2rem;
+            color: #aaa;
+        }
+        .info-box {
+            background: rgba(255, 152, 0, 0.1);
+            border: 1px solid #ff9800;
+            border-radius: 5px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container pending-container">
+        <div class="pending-icon">⏳</div>
+        <h1>Pagamento Pendente</h1>
+        <p>Seu pagamento está sendo processado.</p>
+        
+        <div class="info-box">
+            <p>Os créditos serão adicionados assim que o pagamento for confirmado.</p>
+            <p>Isso pode levar alguns minutos.</p>
+        </div>
+
+        <button onclick="window.location.href='game.html'">Voltar ao Jogo</button>
+        <p class="redirect-message">Redirecionando para o jogo em <span id="countdown">5</span> segundos...</p>
+    </div>
+
+    <script>
+        let seconds = 5;
+        const countdownElement = document.getElementById('countdown');
+        
+        const countdown = setInterval(() => {
+            seconds--;
+            countdownElement.textContent = seconds;
+            
+            if (seconds <= 0) {
+                clearInterval(countdown);
+                window.location.href = 'game.html';
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
